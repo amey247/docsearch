@@ -13,7 +13,7 @@ class FileHelpers {
     static List<File> getFiles(Path start) throws IOException {
         File f = start.toFile();
         List<File> result = new ArrayList<>();
-        if(f.isDirectory()) {
+        if (f.isDirectory()) {
             File[] paths = f.listFiles();
             for(File subFile: paths) {
                 result.addAll(getFiles(subFile.toPath()));
@@ -43,7 +43,7 @@ class Handler implements URLHandler {
            if (parameters[0].equals("q")) {
                String result = "";
                List<String> foundPaths = new ArrayList<>();
-               for(File f: paths) {
+               for (File f: paths) {
                    if(FileHelpers.readFile(f).contains(parameters[1])) {
                        foundPaths.add(f.toString());
                    }
@@ -64,7 +64,7 @@ class Handler implements URLHandler {
 
 class DocSearchServer {
     public static void main(String[] args) throws IOException {
-        if(args.length == 0){
+        if (args.length == 0) {
             System.out.println("Missing port number! Try any number between 1024 to 49151");
             return;
         }
@@ -74,4 +74,3 @@ class DocSearchServer {
         Server.start(port, new Handler("./written_2/"));
     }
 }
-
